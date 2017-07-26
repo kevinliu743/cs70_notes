@@ -12,14 +12,15 @@
 \usepackage{enumitem}
 \usepackage{yfonts}
 \usepackage{ dsfont }
+\usepackage{amsmath}
 \usepackage{array}
 \usepackage{mathabx}
 \usepackage{tabu}  
 \usepackage{color,soul}
 
-\title{CS70 In Simpler Terms - Note 3}
-\author{Kevin Liu}
-\date{\today}
+\title{CS70 In Simpler Terms - Note 4}
+\author{written by Kevin Liu cs70.kevinmliu.com}
+\date{July 6, 2017}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -47,47 +48,45 @@
 \begin{document}
 \maketitle
 
-\section{Infinity and Countability}
-Countability may be a fairly new concept for many of you, and it is easy to confuse computability and countability. Here I will summarize what you need to know as well as a few tips that will guarantee you a few basic points on the exam. 
+\section{Modular Arithmetic}
+There are a number of basic rules that you have to know very well when it comes to mods. But with practice, working with mods can easily and quickly become one of your strenghs.
 \begin{itemize}
-    \item $2$ sets have the same \textit{cardinality}/size if we can demonstrate a bijection between the two sets(show onto and one-to-one)
-    \item Set $S$ is \textit{countable} if there is a bijection between $S$ and $N$
-    \item $|\N| = |\Z| = |\Q|$ (all countable sets)
-    \item if $|A| \leq |B|$ and $|B| \leq |A| \Rightarrow |A| = |B|$
-    \item Binary strings of any finite length: $\{0,1\}^*$ (each digit in a binary string is from the set \{0,1\})
-    \item Ternary strings: $\{0,1,2\}^*$ 
-    \item Lexicographic order: numerically increasing order
-    \item Cantor's Diagonalization proof: proves that $\R$ is not countable by adding $2\pmod{10}$ to each of the values in the diagonal, and noticing that the diagonal number can't exist in the set. This proof can't be used on $\Q$ since adding $2\pmod{10}$ to a rational number does not guarantee that it wil still be a rational number.    
+    \item $a \equiv a\pmod n$
+    \item if $a \equiv b \pmod n$ and $c \equiv d \pmod n$ \\
+            $\Rightarrow (a+c)\pmod n \equiv (b+d)\pmod n$ and \\
+            $(a*c)\pmod n \equiv (b*d)\pmod n$
+    \item $x$ is said to have a multiplicative inverse(M.I.)$\pmod n$ iff the gcd of $x$ and $n$ is 1 ($n, x$ are relatively prime(coprime))\\
+    $ax\pmod n = 1 = 1\pmod n$, where $a$ is the M.I. of $x\pmod n$
+    \item If $x$ has a multiplicative inverse(M.I.)$\pmod n$ $\Rightarrow$ the M.I. is unique
+    \item \textit{Example on the use of the M.I.: Solve for $x$ where $2x = 3\pmod 7$\\ This equation is equivalent to $2x\pmod 7 = 3\pmod 7$\\ The M.I. of $2\pmod 7$ is $4$ so we multiply both sides of the equation by 4\\ We get $8x\pmod 7 = 3\pmod 7$,\\ which equals} ($8\pmod 7$) ($x\pmod 7$)\textit{$= 12\pmod 7$, \\
+    which simplifies to $x\pmod 7 = 5\pmod 7$. \\So $x=5\pmod 7$}
+    \item Bijection: one-to-one and onto. A function, $f$, is said to be a bijection iff there is an inverse function $g$, such that $g(f(x) = x$ and $f(g(y)) = y$ for all $x,y$.
 
 \end{itemize}
-
-\section{Computability and the Halting Problem}
-In this section, I will highlight a few of the most common examples when dealing with computability problems. All of these examples rely on the fact that the Halting problem program does not exist. 
-\textbf{General Halting Problem approach:} \\\\
-Assume by contradiction that program $P$ exists.\\
-\indent define Halt \\
-\indent Modify $F \Rightarrow F^{'}(x)$\\
-\indent Use $P$ as a subroutine\\
-\indent If the original program halts, $P$ returns true, otherwise false\\
-
-\textit{Example problem: \\ \indent Consider a program $P$ that takes in $F$, input $x$, output $y$,\\ \indent returns true if $F(x)$ outputs $y$, and returns false otherwise. 
-}\\
-\indent def Halt(F, x):\\
-\indent \indent $y = 0$ \\
-\indent \indent def $F^{'}(x):$\\
-\indent \indent \indent $F(x)$ \\
-\indent \indent \indent return y \\
-\indent \indent return $P(F^{'}, x, y)$\\
-
-
-
+\textbf{Euclid's Algorithm:} \\
+Let $x \geq y$, and let $x = yq + r$, where $r < y$\\ Then $d=$gcd($x,y$) $=$ gcd($y,r$) because\\
+Taking mod$d$ on both sides, $x$(mod $d$) $= yq($mod $d$) $+ r($mod $d$). We know that $x$(mod $d$)$= 0$,and $yq($mod $d$) also $= 0$ since both terms are divisible by $d$, the greatest common denominator. This means that $r($mod$d$) must also $= 0$, so our proof is complete.\\\\An important result that stems from Euclid's Algorithm is that gcd($x,y$) $= d =$ gcd($x,y-d$).\\\\
+\textbf{Chinese Remainder Theorem:} \\
+I will not go over the proof but I will state the result, which is something you will need to know:
 \begin{itemize}
-    \item Can a computer program print all rational numbers? \\ \indent Yes, since you can enumerate $\Q$ so you can print them.
-    \item There is NO program DEAD which takes $P, x, n$ and determines if the $nth$ line is executed when you run $P(x)$. 
-    \item There exists a program $H$ that determines whether a program $P$ on input $x$ that outputs the value $x + 42$ after executing $42$ statements or \textit{steps}. True statement. 
-    \item \textbf{**IMPORTANT**} You can count the number of steps that a Program has taken, but you can't determine whether a line has been executed. 
+    \item Given a system of equations:\\
+        $x \equiv a_1($mod $n_1)$\\$x \equiv a_2($mod $n_2)...$\\$x \equiv a_k($mod $n_k)$\\ If the gcd($n_i, n_j) = 1$\\ $\Rightarrow$ There exists a unique solution for $x$ mod($n_1 * n_2 * ... n_k$) 
+    \item You can also go backwards too! Given:\\
+    $n \equiv 1$ mod($5 * 11 * 17$) $\Leftarrow$ coprime numbers\\
+    $\Rightarrow n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$)\\
+    Because $n = 1 + (5*11*17) * q$, and taking$\pmod 5$ on both sides,\\
+    We see that we get $n\pmod5 = 1\pmod 5$\\
+    Taking (mod 11) and (mod 17) gives us the other 2 results. 
 \end{itemize}
-
+\textbf{Fermat's Little Theorem:} \\
+This is arguably the most important theorem you need to remember when it comes to problems concerning mods. Applying this theorem can often simplify your calculations by a significant amount. 
+\begin{itemize}
+	\item if $p$ is prime, then $a^p\equiv a\pmod p$ \textit{($a^p - a$ is a multiple of p)}
+	\item if $p$ does not divide $a$ where $a >0$, then $a^{p - 1}\equiv 1\pmod p$
+	\item $x^a \equiv x^{a mod(p-1)}$
+	\item \textbf{**IMPORTANT**} $a^{(p-1)(q-1)}\equiv 1$ mod($pq$). This can be extended to any number of variables (e.g. $p,q,r, s$)\\\\
+    \textit{Example: Simplify $11^{97}$mod($3 * 5*7$)\\ From the above theorem, $11^{(3-1)(5-1)(7-1)} \equiv 11^{48} \equiv 1$ mod($3*5*7)$)\\Looking back at our initial problem:\\ $11^{97} = (11^{48})^2 * 11 \equiv 1^2 * 11\pmod{3*5*7} \equiv 11\pmod{105}$ }
+\end{itemize}
 
 
 \end{document}
