@@ -1,0 +1,102 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 7}
+\author{Kevin Liu}
+\date{July 23, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Uniform Distribution}
+$Unif\{1,2,...n\}$, deals with the set = $\{1,2, ... n\}$
+\begin{itemize}
+    \item Rolling Dice problems - $n = 6$
+    \item $Pr(X=x) = \frac{1}{n} = \frac{1}{6}$ in the case of rolling a dice
+    \item $E(X) = \sum_{x=1}^n x\frac{1}{n} = \frac{1}{n}\frac{(n+1)n}{2} =\frac{n+1}{2} = \frac{7}{2}$ for dice
+    \item $E(X^2) = \frac{1}{n}(1^2 + 2^2 + ... n^2) = \frac{1}{n}\frac{n(n+1)(2n+1)}{6} =\frac{(n+1)(2n+1)}{6}$
+    \item $Var(X) = E(X^2) - E(X)^2 = \frac{n^2 -1}{12}$
+\end{itemize}
+
+\section{Bernoulli Distribution}
+$Pr(X=x) =
+\begin{cases}
+1-p,\indent x=0\\
+p, \indent\indent x = 1\\
+0,\indent otherwise
+\end{cases}$
+\begin{itemize}
+    \item $P(Success) = p, P(Fail) = 1-p$ 
+    \item $P(X=x) = (1-p)^{1-x}p^x$ \textit{$1-x$ failures until success on $x$th trial}
+    \item $E(X) = 0 * (1-p) + 1*P(X=1) = p$
+    \item $E(X^2) = 0^2 * (1-p) + 1^2*p = E(X) = p$
+    \item $Var(X) = p - p^2 = p(1-p)$
+\end{itemize}
+
+\section{Indicator r.v. Revisited}
+Indicator r.v. essentially follow the Bernoulli Distribution
+\begin{itemize}
+    \item Let $X_i = $ indicator r.v. and $X_i = 1$ if trial $i$ is a success, and $0$ otherwise
+    \item $X = X_1 + X_2 + ... X_n$
+    \item $E(X) = E(X_1 + ... X_n) = E(X_1) + ... E(X_n)$
+    \item $E(X_i) = Pr(trial i is a success) = p \Rightarrow E(X) = np$
+    \item $Var(X) = Var(X_1) + Var(X_2) +... Var(X_n) = np(1-p)$
+\end{itemize}
+
+\section{Binomial Distribution}
+$Bin(n,p)$
+\begin{itemize}
+    \item Flipping coin problems 
+    \item $Pr(X=i) = \binom{n}{i}p^i(1-p)^{n-i}$ for $i= 0, 1, ...n$
+    \item if $X \sim Bin(n,p)$, $\sum_{i=0}^n Pr(X=i) = 1$
+    \item Practical Example: Error Erasure Code
+    \begin{itemize}
+        \item $n+k$ packets, and each packet has probability $p$ of getting lost ($(1-p)$ of successfully transfering)
+        \item $X \sim Bin(n+k, 1-p)$
+        \item Probability of receiving at least $n$ packets = $Pr(X \geq n) = \sum_{i=n}^{n+k}Pr(X=i) = \sum_{i=n}^{n+k}\binom{n+k}{i}(1-p)^ip^{n+k-i}$
+
+    \end{itemize}
+
+\end{itemize}
+
+
+\end{document}

@@ -1,0 +1,268 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 2}
+\author{Kevin Liu}
+\date{June 25, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Stable Marriage Theorem}
+In this section I will provide a few key tips and examples for you to remember. I will not run through the algorithm, since you can refer to the course notes for that.\\ 
+
+\textbf{Important things to remember:}
+\begin{enumerate}
+	\item There are no rogue couples, and if it's a male optimal pairing, then it must be a female pessimal pairing.
+	\item A stable marriage pairing is always \textit{stable} and always \textit{paired}, thus the name.
+	\item Halting Lemma: The algorithm terminates within $n^2$ days, where $n$ is the number of pairs. 
+	\item Improvement Lemma: the man that a woman has on a string can only get more preferable over time. 
+	\item When tackling Stable Marriage problems, look to make use of contradiction, induction, or rogue couples in your proofs.
+	
+\end{enumerate}
+
+\textbf{Examples:}
+
+\begin{table}[htbp]
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1>2$\\ \hline
+        B & $2 >1$\\ \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        F & M\\ \hline
+        1 & $B > A$ \\ \hline
+        2 & $A > B$\\ \hline  
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1$\\ \hline
+        B & $2$\\ \hline  
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        F & M\\ \hline
+        1 & $B$ \\ \hline
+        2 & $A$\\ \hline  
+    \end{tabular}
+    \hfill
+    \\
+\end{table}
+
+\begin{center}
+\scriptsize{\textbf{MALE PREFERENCES AND FEMALE PREFERENCES ARE EXACT OPPOSITES}}\\
+\scriptsize{Male Preferences, Female Preferences, Male Optimal Pairing, Female Optimal Pairing, respectively.}
+\end{center}
+
+\begin{table}[htbp]
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1 > 2 > 3$\\ \hline
+        B & $1 > 2 > 3$\\ \hline
+        C & $1 > 2 > 3$\\ \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        F & M\\ \hline
+        1 & $A > B > C$ \\ \hline
+        2 & $B > A > C$\\ \hline  
+        3 & $C > B > A$\\ \hline 
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1$\\ \hline
+        B & $2$\\ \hline  
+        C & $3$\\ \hline 
+    \end{tabular}
+    \hfill
+\end{table}
+\begin{center}
+\scriptsize{\textbf{ALL MALE PREFERENCES THE SAME}}\\
+\scriptsize{Male Preferences, Female Preferences, Male Optimal Pairing, respectively.}
+\end{center}
+
+\newpage
+
+\begin{table}[htbp]
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1 > 2 > 3$\\ \hline
+        B & $1 > 2 > 3$\\ \hline
+        C & $2 > 1 > 3$\\ \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        F & M\\ \hline
+        1 & $C > B > A$ \\ \hline
+        2 & $A > B > C$\\ \hline  
+        3 & $A > B > C$\\ \hline 
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $2$\\ \hline
+        B & $3$\\ \hline  
+        C & $1$\\ \hline 
+    \end{tabular}
+    \hfill
+\end{table}
+\begin{center}
+\scriptsize{\textbf{NO MALE GETS FIRST CHOICE}}\\
+\scriptsize{Male Preferences, Female Preferences, Male Optimal Pairing, respectively.}
+\end{center}
+
+\begin{table}[htbp]
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $2 > 1 > 3$\\ \hline
+        B & $3 > 2 > 1$\\ \hline
+        C & $1 > 3 > 2$\\ \hline
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        F & M\\ \hline
+        1 & $B > A > C$ \\ \hline
+        2 & $C > B > A$\\ \hline  
+        3 & $A > C > B$\\ \hline 
+    \end{tabular}
+    \hfill
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $2$\\ \hline
+        B & $3$\\ \hline  
+        C & $1$\\ \hline 
+    \end{tabular}
+    \hfill
+       \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $3$\\ \hline
+        B & $1$\\ \hline  
+        C & $2$\\ \hline 
+    \end{tabular}
+    \hfill
+       \begin{tabular}[t]{|c|c|}
+        \hline
+        M & F\\ \hline
+        A & $1$\\ \hline
+        B & $2$\\ \hline  
+        C & $3$\\ \hline 
+    \end{tabular}
+    \hfill
+\end{table}
+\begin{center}
+\scriptsize{\textbf{3 STABLE PAIRINGS}}\\
+\scriptsize{Male Preferences, Female Preferences, Male Optimal Pairing, Female Optimal Pairing, Stable Pairing.}
+\end{center}
+
+
+\begin{raggedleft}
+The next few sections are mostly just definitions that you need to know. Other than being comfortable working with these terms and putting them on your cheat sheet, there isn't much else here.
+\end{raggedleft}
+\section{Traveling Directions}
+
+\begin{enumerate}
+	\item Path - any sequence of edges where no vertex is repeated.
+	\item Walk - Like a \textit{path}, but vertices can be repeated.
+	\item Cycle - Like a \textit{path} that starts and ends on the same vertex.
+	\item Tour - Like a \textit{walk} that start and ends on the same vertex.
+	\item Eulerian tour- a \textit{tour} that visits all edges once (no repeating edges, but can repeat vertices). Graph must be undirected, have even degree, and be connected. 
+	\item Hamiltonian/Rudrata cycle- a \textit{cycle} that visits each vertex once.
+\end{enumerate}
+
+\textbf{Often misunderstood definitions:} \textit{A Path is a Walk, and a Cycle is a tour.}
+
+\section{Graphs and Trees} 
+\begin{enumerate}
+	\item Sum of degrees in a graph is $2e$, so it must be even.
+	\item Tree - an undirected graph (n-vertex tree):
+		\begin{itemize}
+			\item $n-1$ edges
+			\item connected, \textit{no cycles}
+			\item remove $1$ edge, and the tree becomes disconnected
+			\item add $1$ edge and it creates a cycle in the tree
+			\item sum of all degrees = $2(n-1)$
+			\item More likely than not, for proofs regarding the existence of a path in a tree, try to use the above information and proof by contradiction.
+		\end{itemize}
+	\item Planar Graph - a graph that can be drawn without crossings. 
+		\begin{itemize}
+			\item no $K_5$ or $K_{3,3}$
+			\item number of faces is equivalent to the number of cycles.
+			\item $v + f = e + 2$
+			\item $\sum_{i=1}^{f} s_{i} = 2e$
+			\item $e \leq 3v - 6$ - \textit{Know how this is derived!\\ \textbf{Derivation:} Every face has at least 3 sides, so $s_i \geq 3$ \\Therefore, from the above equation, $2e \geq 3f$\\Since $f = e + 2 - v$, subtitute f $\Rightarrow 2e \geq 3e + 6 - 3v$ \\ Rearranging, we get the desired result: $e \leq 3v - 6$ }\\
+			This result tells us that planar graphs can't have too many edges.
+		\end{itemize}
+	\item Complete Graph \textit{$K_n$} - a graph with the maximum number of edges possible
+		\begin{itemize}
+			\item has $\frac{n(n - 1)}{2}$ edges.
+			\item the opposite of a tree, which has the minimum number of edges.
+		\end{itemize}
+	\item Hypercubes - Whenever you see a problem about a hypercube, just think: \textit{Bit Strings}! Each time you go to a neighboring vertex, you are just flipping a bit in a bit string. The following definitions apply to a hypercube with dimension $n$, which can be thought of as an $n$-bit string.
+		\begin{itemize}
+			\item each vertex has degree $n$
+			\item $n*2^{n-1}$ edges 
+			\item $2^n$ vertices (you have n bits, and each bit can be either $1$ or $0$)
+			\item ($n+1$)th dimension hypercube $=$ combine 2 $n$-dimension cubes
+		\end{itemize}
+
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{mathabx}
+
+\title{CS70 In Simpler Terms - Note 1}
+\author{written by Kevin Liu cs70.surge.sh}
+\date{June 20, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Sets and their Properties}
+This section contains definitions that you are expected to be familiar with throughout the course. 
+
+\begin{enumerate}
+	\item Cardinality: $|A|$ number of items in a set (\textit{e.x. $A = {a, b, c}$ Then the cardinality of A, denoted $|A|$, is $3$.})
+	\item Subset: $\subseteq$ (\textit{e.x. $A \subseteq B$ reads A is a subset of B.})
+	\item Proper Subset: $\subset$ (\textit{e.x. $A \subseteq B$ reads A is a proper subset of B so A includes all subsets of B, but not B itself.})
+	\item Disjoint Sets: 2 sets are said to be disjoint if $A \cap B = \emptyset$
+	\item Relative Complement of $A$ in $B = B - A = B$\textbackslash $A$, which means everything that is in B but not in A.
+	\item Cartesian Product: cross product of sets (\textit{e.x. $A \bigtimes B = \{(a,b) \hspace{1ex}| \hspace{1ex} a\in A, b\in B\}$.}) 
+	\item Power Set: $\mathscr{P}(S)$: The set of all subsets of $S$.(\textit{e.x. let $S = \{1,2\}$, then $\mathscr{P}(S)$ = $\{ \{\}, \hspace{1ex}\{1\}, \hspace{1ex}\{2\}, \hspace{1ex}\{1,2\}\}$}). The cardinality of $\mathscr{P}(S)$ is $2^k$, where $k$ is the cardinality of $S$.
+	\item $\forall$ $=$ for \textit{all} a.k.a. the Universal Quantifier
+	\item $\exists$ $=$ there \textit{exists} some a.k.a. Existential Quantifier
+	
+\end{enumerate}
+
+\section{Propositions}
+\textit{Propositions} are statements/expressions that are either true or false. A \textit{Tautology} is a proposition that always evaluates to true. A \textit{Contradiction} is a proposition that is always false.\\
+I will assume that everyone is familiar with and/not/or logic so I will not go in depth here.
+
+\begin{enumerate}
+	\item Conjunction: $\land$ $=$ and
+	\item Disjunction: $\wedge$  $=$ or
+	\item Negation: $\neg$ $=$ not
+	\item Implication: P $\Rightarrow$ Q
+	\item Contrapostive of the above: $\neg Q \Rightarrow$ $\neg P$ $\equiv P\Rightarrow Q \equiv \neg P \vee Q$ 
+	\item Converse: $Q \Rightarrow P$ : not equivalent to $P \Rightarrow Q$ 
+
+	
+\end{enumerate}
+
+
+
+Oftentimes, making a truth table will simplify propositional logic a lot. Below is a simple truth table that you might find useful to keep in mind.
+
+\begin{displaymath}
+\begin{array}{|c c|c|c|}
+% |c c|c| means that there are three columns in the table and
+% a vertical bar ’|’ will be printed on the left and right borders,
+% and between the second and the third columns.
+% The letter ’c’ means the value will be centered within the column,
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+p & q & p \Rightarrow q \hspace{1ex} \equiv \hspace{1ex} \neg p \wedge q & p \iff q\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & T & T & T\\
+T & F & F & F\\
+F & T & T & F\\
+F & F & T & T\\
+\end{array}
+\end{displaymath} \\
+
+I have also listed some common examples of statements that are true. They supplement the concept that the Universal Quantifier($\forall$) distributes over conjunction($\land$), and the Existential Quantifier($\exists$) distributes over disjunction($\vee$). 
+
+\begin{enumerate}
+	\item $\exists y \forall x P(x,y) \equiv \forall x \exists y P(x,y)$
+	\item $\forall x \forall y (P(x,y) \land Q(x,y)) \equiv \forall x (\forall y P(x,y)) \land (\forall y Q(x,y))$
+	\item $\exists x \exists y (P(x,y) \vee Q(x,y)) \equiv \exists x (\exists y P(x,y)) \vee (\exists y Q(x,y))$
+	\item $\exists x \forall y (P(x,y) \vee Q(x,y)) \not\equiv \exists x (\forall y P (x , y)) \vee (\forall Q(x,y))$
+
+\end{enumerate}
+
+\section{Proofs}
+For this course, there are just a few simple proofs that you need to know.
+
+\begin{itemize}
+  \item Direct Proof: Assume P $\Rightarrow$ Q
+  \item Proof by Contraposition: Assume $\neg$Q $\Rightarrow$ $\neg$P
+  \item Proof by Contradiction: Assume $\neg$P...R...$\neg$R. Since $\neg$P $\Rightarrow$ ($\neg$R $\land$ R) is a contradiction, so P.
+  \item Proof by Mathematical Induction: Arguably the most common proof you will be tested on. Just follow the steps, and you will be fine. \\
+
+  \begin{enumerate}
+  	\item Base case: Just like how in recursive functions you need a base case to STOP on, you need a base case to START from. \textit{e.x. For $n = 0$, the statement is true. \checkmark}
+  	\item Inductive Hypothesis: Assume what you are trying to prove is true for all $n$ up until some arbitrary $k$. (\textit{e.x. Assume for $0 < n \leq k$, the statement is true.}). Sometimes you have to make your hypothesis stronger by making more assumptions than is given. This is known as strong induction, and you utilize this when you realize your original weak induction does not work.
+  	\item Inductive Step: Show that for $n = k + 1$, the statement is true. This usually takes some case-work to prove, but just do a few practice problems and it will get pretty easy. 
+  \end{enumerate}
+
+\end{itemize}
+
+
+\end{document}

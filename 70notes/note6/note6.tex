@@ -1,0 +1,100 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 6}
+\author{Kevin Liu}
+\date{July 21, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Random Variables and Expectations}
+There are a few main distributions that we will be focusing on in this course, but understanding the probability aspect and how to calculate their Expectations will be key to your success.\\\\
+\textbf{Random Variabe:} a function $X: \omega \Rightarrow R$ that assigns a real number to every outcome $\omega$ in the probability space. ($\omega$ is a sample point) \\
+\indent \textit{Example: $X(\omega) = number of heads$, then $X(THH) = 2$}\\\\
+\textbf{Expectation and Linearity:}
+\begin{itemize}
+    \item Expectation is the mean/average of the r.v.: $E(x)= \sum_a xP(x=a)$
+    \item Linearity:
+    \begin{itemize}
+        \item For $2$ r.v. $x,y$ on the same probability space: $E(X+Y) = E(X) + E(Y)$
+        \item For any constant $c$, $E(cX) = cE(X)$
+        \item \textbf{Note: Linearity of Expectation holds even when the r.v. is NOT Independent}
+    \end{itemize}
+    \item $E(XY) = E(X)E(Y)$ \textit{iff} $X,Y$ are independent
+    \item The expected number of fixed points in a random permutation of $n$ items is always $1$ regardless of $n$ (e.g. $E(X) = 1$)
+    \item Indicator Variables general form:\\
+    \begin{itemize}
+        \item Let $X_i$ be the indicator of of whether...
+        \item $X = X_1 + X_2 + ... X_n \Rightarrow E(X) = \sum_{i=1}^n E(X_i)$
+        \item $E(X^2) = E([X_1 + X_2 + .. X_n]^2) = \sum_{i=1}^n E(X_i)^2 + \sum_{i\neq j}^{n(n-1)}E(X_i X_j)$ \textbf{Explanation:} \textit{there are $n(n-1)$ unlike terms in the expansion of $(X_1 + X_2 + .. X_n)(X_1 + X_2 + .. X_n)$(after selecting $1$ of the $n$ terms in the first set, you have $n-1$ other terms to choose from in the second of the pair)}
+        \item $E(X_i) = E(X_i^2)$ - since you only care about $Pr(X_i=1) \Rightarrow \\E(X_i) = 1 * Pr(X_i = 1) + 0 * Pr(X_i = 0)$
+        
+    \end{itemize}
+
+\end{itemize}
+
+\section{Variance and Covariance}
+\textbf{Definition:} $Var(x) = E((x-\mu)^2) = \sigma^2$, where $\sigma$ is standard deviation. So $Var(x) = (\sqrt\sigma)$
+\begin{itemize}
+    \item For r.v. with $E(X) = \mu$, $Var(X) = E(X^2) - \mu^2 = E(X^2) - E(X)^2$
+        \begin{itemize}
+            \item Proof: $Var(X) = E((x-\mu)^2) = E(X^2 - 2\mu X + \mu^2)$\\ $= E(X^2) - 2\mu E(x) + \mu^2$ and substituting $\mu for E(X)$, we get \\ $Var(X) = E(X^2) - \mu^2 = E(X^2) - E(X)^2$
+        \end{itemize}
+    \item $Var(cX) = c^2Var(X)$
+    \item Independent r.v.: $P(X=a, Y=b) = P(X=a)P(Y=b)$ $\forall a,b$
+    \item Covariance
+    \begin{itemize}
+        \item Covariance of $X,Y = E(XY) - E(X)(Y)$, and if $X,Y$ are independent, the covariance is $0$
+        \item $Var(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)$ and $Cov(X,Y) = 0$ if $X,Y$ are independent
+        \item $Cov(a + bX, c + dY) = bdCov(X,Y)$
+        \item $Cov(X_1 + X_2, Y) = Cov(X_1,Y) + Cov(X_2,Y)$
+    \end{itemize}
+
+    \item Note that the value of $Var(X) \geq 0$ so $E(X^2) \geq E(X)^2$
+
+\end{itemize}
+
+
+
+
+\end{document}

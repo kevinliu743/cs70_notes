@@ -1,0 +1,93 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 3}
+\author{Kevin Liu}
+\date{\today}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Infinity and Countability}
+Countability may be a fairly new concept for many of you, and it is easy to confuse computability and countability. Here I will summarize what you need to know as well as a few tips that will guarantee you a few basic points on the exam. 
+\begin{itemize}
+    \item $2$ sets have the same \textit{cardinality}/size if we can demonstrate a bijection between the two sets(show onto and one-to-one)
+    \item Set $S$ is \textit{countable} if there is a bijection between $S$ and $N$
+    \item $|\N| = |\Z| = |\Q|$ (all countable sets)
+    \item if $|A| \leq |B|$ and $|B| \leq |A| \Rightarrow |A| = |B|$
+    \item Binary strings of any finite length: $\{0,1\}^*$ (each digit in a binary string is from the set \{0,1\})
+    \item Ternary strings: $\{0,1,2\}^*$ 
+    \item Lexicographic order: numerically increasing order
+    \item Cantor's Diagonalization proof: proves that $\R$ is not countable by adding $2\pmod{10}$ to each of the values in the diagonal, and noticing that the diagonal number can't exist in the set. This proof can't be used on $\Q$ since adding $2\pmod{10}$ to a rational number does not guarantee that it wil still be a rational number.    
+
+\end{itemize}
+
+\section{Computability and the Halting Problem}
+In this section, I will highlight a few of the most common examples when dealing with computability problems. All of these examples rely on the fact that the Halting problem program does not exist. 
+\textbf{General Halting Problem approach:} \\\\
+Assume by contradiction that program $P$ exists.\\
+\indent define Halt \\
+\indent Modify $F \Rightarrow F^{'}(x)$\\
+\indent Use $P$ as a subroutine\\
+\indent If the original program halts, $P$ returns true, otherwise false\\
+
+\textit{Example problem: \\ \indent Consider a program $P$ that takes in $F$, input $x$, output $y$,\\ \indent returns true if $F(x)$ outputs $y$, and returns false otherwise. 
+}\\
+\indent def Halt(F, x):\\
+\indent \indent $y = 0$ \\
+\indent \indent def $F^{'}(x):$\\
+\indent \indent \indent $F(x)$ \\
+\indent \indent \indent return y \\
+\indent \indent return $P(F^{'}, x, y)$\\
+
+
+
+\begin{itemize}
+    \item Can a computer program print all rational numbers? \\ \indent Yes, since you can enumerate $\Q$ so you can print them.
+    \item There is NO program DEAD which takes $P, x, n$ and determines if the $nth$ line is executed when you run $P(x)$. 
+    \item There exists a program $H$ that determines whether a program $P$ on input $x$ that outputs the value $x + 42$ after executing $42$ statements or \textit{steps}. True statement. 
+    \item \textbf{**IMPORTANT**} You can count the number of steps that a Program has taken, but you can't determine whether a line has been executed. 
+\end{itemize}
+
+
+
+\end{document}
