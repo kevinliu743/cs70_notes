@@ -80,7 +80,7 @@ Oftentimes you will be asked to find $n$ given some amount of confidence. We wil
         X_i = 0, \indent tails
     \end{cases}$
     \item $E(X_i) = p, E(\hat{p} = E(\frac{S_n}{n}) = \frac{1}{n}nX_i = p$
-    \item $Var(\hat{p}) = Var(\frac{S_n}{n} = \frac{1}{n^2}Var(S_n) = \frac{\sigma^2}{n}$
+    \item $Var(\hat{p}) = Var(\frac{S_n}{n} = \frac{1}{n^2}Var(S_n)) = \frac{\sigma^2}{n}$
     \item $Pr(|\hat{p} - p| \geq \epsilon) \leq \frac{\sigma^2}{n\epsilon^2}$\\
     $\Rightarrow n \geq \frac{\sigma^2}{\epsilon^2\delta} = \frac{p(1-p)}{\epsilon^2\delta} \geq \frac{1}{4\epsilon^2\delta}$ (variance of single sample is $p(1-p)$ and the bound is at $p = 0.5$)
 
