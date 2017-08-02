@@ -1,0 +1,95 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 12}
+\author{written by Kevin Liu cs70.kevinmliu.com}
+\date{August 2, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Markov Chains and their Properties}
+\begin{itemize}
+    \item rows sum to 1 (in this class)
+    \item $P(i,j)$ = probability of transitioning from state $i$ to state $j$
+    \item $\pi_n = \pi_0P^n$
+    \item amnesic - regardless of what happens before, the probability of transitioning to other states remains the same
+    \item A distribution $\pi$ is said to be \textit{invariant} if $\pi = \pi p$
+    \begin{itemize}
+        \item $\pi P - \pi = 0 \Rightarrow \pi(P - I) = 0$
+    \end{itemize}
+    \item Irreducibility - can go from every state $i$ to every other state $j$ \\
+    (None of the probabilities in the transition matrix can be 0 or 1)
+    \item Let $d(i)$ denote the $gcd$ of the number of steps for a cycle(going from state $i$ to state $i$) for all elements in the state space: \\\textit{i.e. let the state space be {1, 2, 3} and $P(1,1)= 2, P(2,2) = 4, P(3,3) = 6,$ then $d(i) = 2$ }\\ \textbf{For an irreducible Markob chain, $d(i)$ is the same for all $i$ in the state space}
+    \begin{itemize}
+        \item aperiodic - if $d(i) = 1$ for all $i$ in the state space
+        \item periodic - if $d(i)$ is anything else
+    \end{itemize}
+    \textbf{Summary:}
+    \begin{itemize}
+        \item \textit{Irreducible} $\Rightarrow$ has unique invariant distribution
+        \item \textit{Irreducible + aperiodic} $\Rightarrow$ has unique invariant distribution AND converges to the invariant distribution as $n \rightarrow \infty$
+    \end{itemize}
+\end{itemize}
+
+
+\section{Hitting Time Questions}
+Hitting time - The expected time until you reach a state $s'$
+\begin{itemize}
+        \item Let's say you wish to calculate the time it takes for you to count $n$ medals. After counting $i$ medals, the probability that you will be able to count the $i+1$th medal is $p$ and the probability that you will mess up and have to start over is $1-p$. How would you approach this problem?
+        \begin{itemize}
+            \item Turns out there is a quick trick for writing the FSE(First Step Equations), and you can let $\beta (i)$ denote the expected time to count \textit{the remaining} $i$ medals
+            \item $\beta (i) = p (\beta (i - 1) + 1) + (1-p)\beta (n)$ 
+        \end{itemize}
+        \item Another good Hitting Time Question is the Gambler's Ruin Problem. Given the state space $\cal X$ $= \{0,...b\}$ and the probability of winning each round be $p$, what is the probability that you will reach $b$ before 0?\\
+        You will most likely only be asked to write the FSE (or the majority of the points will be writing the equations):
+        \begin{itemize}
+            \item Let $\alpha(0) = 0$ (you lose), $\alpha(b) = 1$ (you win), and $i$ be your current state
+            \item $\alpha(i) = (1-p)\alpha(i-1) + p\alpha(i+1)$
+        \end{itemize}
+        Solving, we get $\alpha(i) = \frac{1 - \rho^i}{1- \rho^b}$, where $\rho = \frac{1-p}{p}$ \\
+        \textit{ Knowing how to solve the FSE is not extremely important in this class (if tested, it will not be worth many points), but if you would like to know, check the appendix in your class notes. Solving FSE usually requires the ability to recognize a pattern, and being able to simplify the equations.}
+\end{itemize}
+
+
+
+\end{document}
