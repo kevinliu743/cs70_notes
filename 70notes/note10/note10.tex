@@ -55,9 +55,12 @@
     \begin{itemize}
         \item $ed = 1\pmod (p-1)(q-1) = 1 + (p-1)(q-1)k$
         \item $x^{ed} - x = x^{1+k(p-1)(q-1)} - x = x(x^{k(p-1)(q-1)} - 1)$ \newline We are trying to show that the above statement $\equiv 0 \pmod N$, because then we will have proven that $x^{ed} \equiv x \pmod N$
-        \item We can do this by showing that $x$ is divisibly by $p$ and $q$ $\Rightarrow$ divisible by $pq$
-        \item case 1: $p | x$ \newline assuming that $x \neq 0\pmod p$ and using FLT \newline
+        \item We can do this by showing that $x$ is divisibly by $p$ and $x$ is divisible by $q \Rightarrow$ divisible by $pq$
+        \begin{itemize}
+            \item case 1: $x$ is a multiple of $p$, in which case we are done
+            \item case 2: $x$ is not a multiple of $p$ so using FLT \newline
         $x^{p-1} \equiv 1\pmod p \Rightarrow (x^{p-1})^{k(q-1)} \equiv 1^{k(q-1)} \pmod p \equiv 1 \pmod p \Rightarrow x^{k(p-1)(q-1)} -1 \equiv 0 \pmod p \qed$
+        \end{itemize}
         \item the proof for the case where $q|x$ is analagous
      \end{itemize}
 \end{itemize}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 AUG 2017 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 AUG 2017 17:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1289,7 +1289,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
 
-Overfull \hbox (3.69171pt too wide) in paragraph at lines 59--61
+Overfull \hbox (22.39168pt too wide) in paragraph at lines 61--63
 \OML/cmm/m/it/10 x[] \U/matha/m/n/10 ^^Q \OT1/cmr/m/n/10 1\U/matha/m/n/10 p[]\O
 ML/cmm/m/it/10 p\U/matha/m/n/10 q ñ p\OML/cmm/m/it/10 x[]\U/matha/m/n/10 q[] ^^
 Q \OT1/cmr/m/n/10 1[]\U/matha/m/n/10 p[]\OML/cmm/m/it/10 p\U/matha/m/n/10 q ^^Q
@@ -1297,27 +1297,27 @@ Q \OT1/cmr/m/n/10 1[]\U/matha/m/n/10 p[]\OML/cmm/m/it/10 p\U/matha/m/n/10 q ^^Q
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--74
+Underfull \hbox (badness 10000) in paragraph at lines 71--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--74
+Underfull \hbox (badness 10000) in paragraph at lines 71--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--74
+Underfull \hbox (badness 10000) in paragraph at lines 71--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--74
+Underfull \hbox (badness 10000) in paragraph at lines 71--77
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 68--74
+Underfull \hbox (badness 10000) in paragraph at lines 71--77
 
  []
 
@@ -1351,7 +1351,7 @@ fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha12
 5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/math
 a7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mat
 hx10.pfb>
-Output written on note10.pdf (2 pages, 147877 bytes).
+Output written on note10.pdf (2 pages, 147488 bytes).
 PDF statistics:
  82 PDF objects out of 1000 (max. 8388607)
  60 compressed objects within 1 object stream
