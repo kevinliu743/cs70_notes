@@ -1,0 +1,114 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 10}
+\author{written by Kevin Liu cs70.kevinmliu.com}
+\date{August 1, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{RSA}
+\begin{itemize}
+    \item Encrypt message x: $E(X) = x^e\pmod N$, $N = pq$ (large primes)
+    \item Decode $m = E(x)$: $D(m) = m^d \pmod N$, where $d$ is the M.I. of $e\pmod (p-1)(q-1) \Rightarrow gcd(e, (p-1)(q-1)) = 1$ ensures that $d$ exists \textit{since $e$ is relatively prime with $(p-q)(q-1)$}
+    \item $D(E(x)) = x\pmod N \Rightarrow E$ is a bijection - \textbf{$x^{ed} = x\pmod N$} \newline Proof:
+    \begin{itemize}
+        \item $ed = 1\pmod (p-1)(q-1) = 1 + (p-1)(q-1)k$
+        \item $x^{ed} - x = x^{1+k(p-1)(q-1)} - x = x(x^{k(p-1)(q-1)} - 1)$ \newline We are trying to show that the above statement $\equiv 0 \pmod N$, because then we will have proven that $x^{ed} \equiv x \pmod N$
+        \item We can do this by showing that $x$ is divisibly by $p$ and $q$ $\Rightarrow$ divisible by $pq$
+        \item case 1: $p | x$ \newline assuming that $x \neq 0\pmod p$ and using FLT \newline
+        $x^{p-1} \equiv 1\pmod p \Rightarrow (x^{p-1})^{k(q-1)} \equiv 1^{k(q-1)} \pmod p \equiv 1 \pmod p \Rightarrow x^{k(p-1)(q-1)} -1 \equiv 0 \pmod p \qed$
+        \item the proof for the case where $q|x$ is analagous
+     \end{itemize}
+\end{itemize}
+\section{Polynomials}
+\begin{itemize}
+        \item degree $d$ polynomial has at most $d$ roots
+        \item need $d+1$ points to uniquely determine polynomial of degree $d$
+        \item Lagrange interpolation - used to find a polynomial of lowest degree, given a set of points \\\\
+        \textit{Formula for calculating the final polynomial $p(x)$ of degree $d$} \newline $p(x) = \sum_{i=1}^{d+1}y_i \Delta_i(x)$, after constructing $d+1$ polynomials $\Delta_i(x)$\\\\
+        \textit{Formula for finding the individual polynomials, $\Delta_i(x) = \frac{\Pi_{j \neq i}(x - x_j)}{\Pi_{j \neq i}(x_i - x_j)}$} \\\\\\\\
+        \textit{Example:}
+        Find the polynomial of lowest degree that passes through the points $(1,1), (2,2), (3,4)$
+        \begin{itemize}
+            \item $d = 2, x_i = i$
+            \item $i = 1$, $\Delta_1(x) = \frac{(x-2)(x - 3)}{(1-2)(1-3)}$ 
+            \begin{itemize}
+                \item This makes sense because at $x = 2, x= 3,$  $\Delta_1(x) = 0$, and at $x=1,$ $\Delta_1(x) = 1$, so $y_1\Delta(x) = 1(1) = 1$ which is correct
+            \end{itemize}
+            \item $i = 2$, $\Delta_2(x) = \frac{(x-1)(x - 3)}{(2-1)(2-3)}$
+            \item $i = 3$, $\Delta_3(x) = \frac{(x-1)(x - 2)}{(3-1)(3-2)}$
+        \end{itemize}
+\end{itemize}
+
+\section{Finite Fields $F_m$ or $GF(m)$}
+Restricting the fields to$\pmod m$
+\begin{itemize}
+    \item $x$ has inverse$\pmod m$ iff$gcd(m,x) = 1$ so $m$ is prime
+    \item $x \in \{1,... m-1\}$ all have an inverse$\pmod m \Rightarrow $ bijection
+    \item How many polynomials are there of degree at most $2 \pmod m$?
+    \begin{itemize}
+        \item There are $3$ coefficients in a degree 2 polynomial
+        \item Each coefficient has $m$ values to choose from $\{0, ...m-1\} \Rightarrow m^3$ polynomials
+    \end{itemize}
+\end{itemize}
+The chart below summarizes the result above:\\\\
+\centering
+\textbf{Polynomials of degree $\leq d$ over $F_m$}
+    \begin{table}[htbp]
+    \centering
+    \begin{tabular}[t]{|c|c|}
+        \hline
+        Number of points given & Number of polynomials\\ \hline
+        $d+1$ & 1\\ \hline
+        $d$ & $m$\\ \hline
+        . & .\\ 
+        . & .\\
+        . & .\\ \hline
+        0 & $m^{d+1}$\\ \hline
+    \end{tabular}
+    \end{table}
+
+
+
+\end{document}

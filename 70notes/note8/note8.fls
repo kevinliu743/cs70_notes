@@ -1,4 +1,4 @@
-PWD /Users/kevinliu743/Documents/Web Development/cs70_notes/70notes/note8
+PWD /Users/kevinliu743/Documents/Web Development/cs70_notes/70notes/note9
 INPUT /usr/local/texlive/2016/texmf.cnf
 INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -277,9 +277,9 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/mathx10.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/mathx10.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/mathx10.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 OUTPUT note8.pdf
 INPUT /usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT note8.aux
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
@@ -294,6 +294,5 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha5.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha7.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb

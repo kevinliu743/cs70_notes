@@ -12,7 +12,6 @@
 \usepackage{enumitem}
 \usepackage{yfonts}
 \usepackage{ dsfont }
-\usepackage{amsmath}
 \usepackage{array}
 \usepackage{mathabx}
 \usepackage{tabu}  
@@ -20,7 +19,7 @@
 
 \title{CS70 In Simpler Terms - Note 4}
 \author{written by Kevin Liu cs70.kevinmliu.com}
-\date{July 6, 2017}
+\date{July 10, 2017}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -48,45 +47,62 @@
 \begin{document}
 \maketitle
 
-\section{Modular Arithmetic}
-There are a number of basic rules that you have to know very well when it comes to mods. But with practice, working with mods can easily and quickly become one of your strenghs.
+\section{Counting}
+For counting problems, there is nothing that can replace practice. Find practice problems and practice, practice, practice. You will soon gain an intuition that is critical for your continuation into discrete and continuous probability. 
 \begin{itemize}
-    \item $a \equiv a\pmod n$
-    \item if $a \equiv b \pmod n$ and $c \equiv d \pmod n$ \\
-            $\Rightarrow (a+c)\pmod n \equiv (b+d)\pmod n$ and \\
-            $(a*c)\pmod n \equiv (b*d)\pmod n$
-    \item $x$ is said to have a multiplicative inverse(M.I.)$\pmod n$ iff the gcd of $x$ and $n$ is 1 ($n, x$ are relatively prime(coprime))\\
-    $ax\pmod n = 1 = 1\pmod n$, where $a$ is the M.I. of $x\pmod n$
-    \item If $x$ has a multiplicative inverse(M.I.)$\pmod n$ $\Rightarrow$ the M.I. is unique
-    \item \textit{Example on the use of the M.I.: Solve for $x$ where $2x = 3\pmod 7$\\ This equation is equivalent to $2x\pmod 7 = 3\pmod 7$\\ The M.I. of $2\pmod 7$ is $4$ so we multiply both sides of the equation by 4\\ We get $8x\pmod 7 = 3\pmod 7$,\\ which equals} ($8\pmod 7$) ($x\pmod 7$)\textit{$= 12\pmod 7$, \\
-    which simplifies to $x\pmod 7 = 5\pmod 7$. \\So $x=5\pmod 7$}
-    \item Bijection: one-to-one and onto. A function, $f$, is said to be a bijection iff there is an inverse function $g$, such that $g(f(x) = x$ and $f(g(y)) = y$ for all $x,y$.
+    \item coin flipping: $2^k$ outcomes
+    \item roll $n$ dice $\Rightarrow 6^n$ choices
+    \item $k$ balls and $n$ bins problem: $n+k-1 \choose n-1$ = $n+k-1 \choose k$
 
 \end{itemize}
-\textbf{Euclid's Algorithm:} \\
-Let $x \geq y$, and let $x = yq + r$, where $r < y$\\ Then $d=$gcd($x,y$) $=$ gcd($y,r$) because\\
-Taking mod$d$ on both sides, $x$(mod $d$) $= yq($mod $d$) $+ r($mod $d$). We know that $x$(mod $d$)$= 0$,and $yq($mod $d$) also $= 0$ since both terms are divisible by $d$, the greatest common denominator. This means that $r($mod$d$) must also $= 0$, so our proof is complete.\\\\An important result that stems from Euclid's Algorithm is that gcd($x,y$) $= d =$ gcd($x,y-d$).\\\\
-\textbf{Chinese Remainder Theorem:} \\
-I will not go over the proof but I will state the result, which is something you will need to know:
+
+\section{Combinatorial Proofs}
 \begin{itemize}
-    \item Given a system of equations:\\
-        $x \equiv a_1($mod $n_1)$\\$x \equiv a_2($mod $n_2)...$\\$x \equiv a_k($mod $n_k)$\\ If the gcd($n_i, n_j) = 1$\\ $\Rightarrow$ There exists a unique solution for $x$ mod($n_1 * n_2 * ... n_k$) 
-    \item You can also go backwards too! Given:\\
-    $n \equiv 1$ mod($5 * 11 * 17$) $\Leftarrow$ coprime numbers\\
-    $\Rightarrow n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$)\\
-    Because $n = 1 + (5*11*17) * q$, and taking$\pmod 5$ on both sides,\\
-    We see that we get $n\pmod5 = 1\pmod 5$\\
-    Taking (mod 11) and (mod 17) gives us the other 2 results. 
+    \item $\binom{n}{k+1} = \binom{n-1}{k}+ \binom{n-2}{k} + ... \binom{k}{k}$
+    \begin{itemize}
+        \item LHS: Number of ways to choose $k+1$ from $n$
+        \item RHS: Order the items. \\(\textit{first term}) Select first item and choose $k$ from the remaining $n-1$\\ (\textit{second term}) Select second item and choose $k$ from the remaining $n-2$ ... and so forth
+    \end{itemize}
+    \item $\binom{n}{0} + \binom{n}{1} + ... \binom{n}{n} = 2^n$
+    \begin{itemize}
+        \item LHS: Sum of ways of choosing $i$ items
+        \item RHS: Total number of subsets from $n$ items.
+    \end{itemize}
+    \item $\sum_{k=0}^{n}k^2 = \binom{n+1}{2} + 2\binom{n+1}{3}$\\
+    Think of this as triplets: $(i,j,k)$, where $i,j \leq k$ and $0 \leq k \leq n$
+    \begin{itemize}
+        \item LHS: $k$ options for $i$, $k$ options for $j \Rightarrow k^2$
+        \item RHS: Take the sum of the following 2 cases.
+        \begin{itemize}
+            \item case 1: $i = j$ - choose $i, k = \binom{n+1}{2}$
+            \item case 2: $i \neq j$ - choose $i, j, k = \binom{n+1}{3}$, but $i,j$ can switch so you multiply your result by $2$
+        \end{itemize}
+    \end{itemize}
+    \item $a(n-a)\binom{n}{a} = n(n-1)\binom{n-2}{a-1}$
+    \begin{itemize}
+        \item LHS: Select a team of $a$ members from $n$ people. Then select $1$ captain from the team, and then a co-captain from the remaining $n-a$ people that have not been chosen for the team yet.
+        \item RHS: Pick a captain from $n$, and then a co-captain from $n-1$. Select the remaining $a-1$ members from $n-2$
+
+    \end{itemize}
+
 \end{itemize}
-\textbf{Fermat's Little Theorem:} \\
-This is arguably the most important theorem you need to remember when it comes to problems concerning mods. Applying this theorem can often simplify your calculations by a significant amount. 
+
+\section{Probability}
+Probability is essentially counting, but dividing that by the sample size. If you understand counting, probability will be easy.
 \begin{itemize}
-	\item if $p$ is prime, then $a^p\equiv a\pmod p$ \textit{($a^p - a$ is a multiple of p)}
-	\item if $p$ does not divide $a$ where $a >0$, then $a^{p - 1}\equiv 1\pmod p$
-	\item $x^a \equiv x^{a mod(p-1)}$
-	\item \textbf{**IMPORTANT**} $a^{(p-1)(q-1)}\equiv 1$ mod($pq$). This can be extended to any number of variables (e.g. $p,q,r, s$)\\\\
-    \textit{Example: Simplify $11^{97}$mod($3 * 5*7$)\\ From the above theorem, $11^{(3-1)(5-1)(7-1)} \equiv 11^{48} \equiv 1$ mod($3*5*7)$)\\Looking back at our initial problem:\\ $11^{97} = (11^{48})^2 * 11 \equiv 1^2 * 11\pmod{3*5*7} \equiv 11\pmod{105}$ }
+    \item Independent Events: $P(A \cap B) = P(A)P(B) \Rightarrow P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)P(B)}{P(B)} $
+    \item Product Rule: $P(A \cap B) = P(A)P(B \mid A)$
+    \item $ P(B) = P(B \mid A) P(A) + P(B \mid \overline A)(1-P(A))$
+    \item $ P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B \mid A) \, P(A)}{P(B)} = \frac{P(B \mid A) \, P(A)}{P(B \mid A) P(A) + P(B \mid \overline A)(1-P(A))} $
+    \item $P(A_1 \cup A_2 ...A_n)$ has $2^n - 1$ intersections at most. The $-1$ is the $\o$
+    \item Principle of Inclusion and Exclusion: Remember to subtract the intersection, otherwise you will double add! 
+    \item For Disjoint events (\textit{mutually exclusive}), $P[\bigcup_{i=1}^n A_i] = \sum_{i=1}^n P[A_i]$. This formula means implies that you can just sum up the probabilities of each individual event if the events are disjoint.
+    \item Union Bound: $P[\bigcup_{i=1}^n A_i] \leq \sum_{i=1}^n P[A_i]$. This effectively states that the sum of the probabilities of events is bounded by the sum of the disjoint probabilities. This is because when events are not disjoint, you must subract overlapping probabilities, so the upper bound for the sum will always be the sum of its dijoint event probabilities. 
+    \item Symmetric events: There are $500$ red marbles and $500$ blue marbles in the bag. THe probability that the first marble is blue $\equiv$ the probability the fifth marble picked is blue $= 1/2$
+
 \end{itemize}
+
+
 
 
 \end{document}

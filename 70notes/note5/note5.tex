@@ -19,7 +19,7 @@
 
 \title{CS70 In Simpler Terms - Note 5}
 \author{written by Kevin Liu cs70.kevinmliu.com}
-\date{July 10, 2017}
+\date{July 21, 2017}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -47,58 +47,50 @@
 \begin{document}
 \maketitle
 
-\section{Counting}
-For counting problems, there is nothing that can replace practice. Find practice problems and practice, practice, practice. You will soon gain an intuition that is critical for your continuation into discrete and continuous probability. 
+\section{Random Variables and Expectations}
+There are a few main distributions that we will be focusing on in this course, but understanding the probability aspect and how to calculate their Expectations will be key to your success.\\\\
+\textbf{Random Variabe:} a function $X: \omega \Rightarrow R$ that assigns a real number to every outcome $\omega$ in the probability space. ($\omega$ is a sample point) \\
+\indent \textit{Example: $X(\omega) = number of heads$, then $X(THH) = 2$}\\\\
+\textbf{Expectation and Linearity:}
 \begin{itemize}
-    \item coin flipping: $2^k$ outcomes
-    \item roll $n$ dice $\Rightarrow 6^n$ choices
-    \item $k$ balls and $n$ bins problem: $n+k-1 \choose n-1$ = $n+k-1 \choose k$
+    \item Expectation is the mean/average of the r.v.: $E(x)= \sum_a xP(x=a)$
+    \item Linearity:
+    \begin{itemize}
+        \item For $2$ r.v. $x,y$ on the same probability space: $E(X+Y) = E(X) + E(Y)$
+        \item For any constant $c$, $E(cX) = cE(X)$
+        \item \textbf{Note: Linearity of Expectation holds even when the r.v. is NOT Independent}
+    \end{itemize}
+    \item $E(XY) = E(X)E(Y)$ \textit{iff} $X,Y$ are independent
+    \item The expected number of fixed points in a random permutation of $n$ items is always $1$ regardless of $n$ (e.g. $E(X) = 1$)
+    \item Indicator Variables general form:\\
+    \begin{itemize}
+        \item Let $X_i$ be the indicator of of whether...
+        \item $X = X_1 + X_2 + ... X_n \Rightarrow E(X) = \sum_{i=1}^n E(X_i)$
+        \item $E(X^2) = E([X_1 + X_2 + .. X_n]^2) = \sum_{i=1}^n E(X_i)^2 + \sum_{i\neq j}^{n(n-1)}E(X_i X_j)$ \textbf{Explanation:} \textit{there are $n(n-1)$ unlike terms in the expansion of $(X_1 + X_2 + .. X_n)(X_1 + X_2 + .. X_n)$(after selecting $1$ of the $n$ terms in the first set, you have $n-1$ other terms to choose from in the second of the pair)}
+        \item $E(X_i) = E(X_i^2)$ - since you only care about $Pr(X_i=1) \Rightarrow \\E(X_i) = 1 * Pr(X_i = 1) + 0 * Pr(X_i = 0)$
+        
+    \end{itemize}
 
 \end{itemize}
 
-\section{Combinatorial Proofs}
+\section{Variance and Covariance}
+\textbf{Definition:} $Var(x) = E((x-\mu)^2) = \sigma^2$, where $\sigma$ is standard deviation. So $Var(x) = (\sqrt\sigma)$
 \begin{itemize}
-    \item $\binom{n}{k+1} = \binom{n-1}{k}+ \binom{n-2}{k} + ... \binom{k}{k}$
-    \begin{itemize}
-        \item LHS: Number of ways to choose $k+1$ from $n$
-        \item RHS: Order the items. \\(\textit{first term}) Select first item and choose $k$ from the remaining $n-1$\\ (\textit{second term}) Select second item and choose $k$ from the remaining $n-2$ ... and so forth
-    \end{itemize}
-    \item $\binom{n}{0} + \binom{n}{1} + ... \binom{n}{n} = 2^n$
-    \begin{itemize}
-        \item LHS: Sum of ways of choosing $i$ items
-        \item RHS: Total number of subsets from $n$ items.
-    \end{itemize}
-    \item $\sum_{k=0}^{n}k^2 = \binom{n+1}{2} + 2\binom{n+1}{3}$\\
-    Think of this as triplets: $(i,j,k)$, where $i,j \leq k$ and $0 \leq k \leq n$
-    \begin{itemize}
-        \item LHS: $k$ options for $i$, $k$ options for $j \Rightarrow k^2$
-        \item RHS: Take the sum of the following 2 cases.
+    \item For r.v. with $E(X) = \mu$, $Var(X) = E(X^2) - \mu^2 = E(X^2) - E(X)^2$
         \begin{itemize}
-            \item case 1: $i = j$ - choose $i, k = \binom{n+1}{2}$
-            \item case 2: $i \neq j$ - choose $i, j, k = \binom{n+1}{3}$, but $i,j$ can switch so you multiply your result by $2$
+            \item Proof: $Var(X) = E((x-\mu)^2) = E(X^2 - 2\mu X + \mu^2)$\\ $= E(X^2) - 2\mu E(x) + \mu^2$ and substituting $\mu for E(X)$, we get \\ $Var(X) = E(X^2) - \mu^2 = E(X^2) - E(X)^2$
         \end{itemize}
-    \end{itemize}
-    \item $a(n-a)\binom{n}{a} = n(n-1)\binom{n-2}{a-1}$
+    \item $Var(cX) = c^2Var(X)$
+    \item Independent r.v.: $P(X=a, Y=b) = P(X=a)P(Y=b)$ $\forall a,b$
+    \item Covariance
     \begin{itemize}
-        \item LHS: Select a team of $a$ members from $n$ people. Then select $1$ captain from the team, and then a co-captain from the remaining $n-a$ people that have not been chosen for the team yet.
-        \item RHS: Pick a captain from $n$, and then a co-captain from $n-1$. Select the remaining $a-1$ members from $n-2$
-
+        \item Covariance of $X,Y = E(XY) - E(X)(Y)$, and if $X,Y$ are independent, the covariance is $0$
+        \item $Var(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)$ and $Cov(X,Y) = 0$ if $X,Y$ are independent
+        \item $Cov(a + bX, c + dY) = bdCov(X,Y)$
+        \item $Cov(X_1 + X_2, Y) = Cov(X_1,Y) + Cov(X_2,Y)$
     \end{itemize}
 
-\end{itemize}
-
-\section{Probability}
-Probability is essentially counting, but dividing that by the sample size. If you understand counting, probability will be easy.
-\begin{itemize}
-    \item Independent Events: $P(A \cap B) = P(A)P(B) \Rightarrow P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)P(B)}{P(B)} $
-    \item Product Rule: $P(A \cap B) = P(A)P(B \mid A)$
-    \item $ P(B) = P(B \mid A) P(A) + P(B \mid \overline A)(1-P(A))$
-    \item $ P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B \mid A) \, P(A)}{P(B)} = \frac{P(B \mid A) \, P(A)}{P(B \mid A) P(A) + P(B \mid \overline A)(1-P(A))} $
-    \item $P(A_1 \cup A_2 ...A_n)$ has $2^n - 1$ intersections at most. The $-1$ is the $\o$
-    \item Principle of Inclusion and Exclusion: Remember to subtract the intersection, otherwise you will double add! 
-    \item For Disjoint events (\textit{mutually exclusive}), $P[\bigcup_{i=1}^n A_i] = \sum_{i=1}^n P[A_i]$. This formula means implies that you can just sum up the probabilities of each individual event if the events are disjoint.
-    \item Union Bound: $P[\bigcup_{i=1}^n A_i] \leq \sum_{i=1}^n P[A_i]$. This effectively states that the sum of the probabilities of events is bounded by the sum of the disjoint probabilities. This is because when events are not disjoint, you must subract overlapping probabilities, so the upper bound for the sum will always be the sum of its dijoint event probabilities. 
-    \item Symmetric events: There are $500$ red marbles and $500$ blue marbles in the bag. THe probability that the first marble is blue $\equiv$ the probability the fifth marble picked is blue $= 1/2$
+    \item Note that the value of $Var(X) \geq 0$ so $E(X^2) \geq E(X)^2$
 
 \end{itemize}
 

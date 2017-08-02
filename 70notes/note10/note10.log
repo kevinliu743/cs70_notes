@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 AUG 2017 16:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 AUG 2017 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**note8.tex
-(./note8.tex
+**note10.tex
+(./note10.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/article.cls
@@ -1185,8 +1185,8 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@ulht=\dimen184
 )
 \c@thm=\count137
- (./note8.aux)
-\openout1 = `note8.aux'.
+ (./note10.aux)
+\openout1 = `note10.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
 LaTeX Font Info:    ... okay on input line 47.
@@ -1281,44 +1281,80 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 48.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 53.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 52.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 53.
- [1
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 52.
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./
-note8.aux) ) 
+Overfull \hbox (3.69171pt too wide) in paragraph at lines 59--61
+\OML/cmm/m/it/10 x[] \U/matha/m/n/10 ^^Q \OT1/cmr/m/n/10 1\U/matha/m/n/10 p[]\O
+ML/cmm/m/it/10 p\U/matha/m/n/10 q ñ p\OML/cmm/m/it/10 x[]\U/matha/m/n/10 q[] ^^
+Q \OT1/cmr/m/n/10 1[]\U/matha/m/n/10 p[]\OML/cmm/m/it/10 p\U/matha/m/n/10 q ^^Q
+ \OT1/cmr/m/n/10 1\U/matha/m/n/10 p[]\OML/cmm/m/it/10 p\U/matha/m/n/10 q ñ
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--74
+
+ []
+
+[1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] (./note10.aux) ) 
 Here is how much of TeX's memory you used:
- 16239 strings out of 493014
- 315454 string characters out of 6133351
- 363311 words of memory out of 5000000
- 19411 multiletter control sequences out of 15000+600000
- 19123 words of font info for 70 fonts, out of 8000000 for 9000
+ 16251 strings out of 493014
+ 315655 string characters out of 6133351
+ 362313 words of memory out of 5000000
+ 19423 multiletter control sequences out of 15000+600000
+ 21582 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 61i,7n,84p,470b,241s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
-.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha7.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb>
-Output written on note8.pdf (2 pages, 141587 bytes).
+ 61i,11n,84p,471b,323s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha10.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha12
+.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha
+5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/math
+a7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mat
+hx10.pfb>
+Output written on note10.pdf (2 pages, 147877 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 54 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

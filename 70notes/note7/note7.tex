@@ -19,7 +19,7 @@
 
 \title{CS70 In Simpler Terms - Note 7}
 \author{written by Kevin Liu cs70.kevinmliu.com}
-\date{July 23, 2017}
+\date{July 25, 2017}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -47,56 +47,57 @@
 \begin{document}
 \maketitle
 
-\section{Uniform Distribution}
-$Unif\{1,2,...n\}$, deals with the set = $\{1,2, ... n\}$
+\section{Geometric Distribution}
+Problems that deal with the length of time you need to wait until an event happens
 \begin{itemize}
-    \item Rolling Dice problems - $n = 6$
-    \item $Pr(X=x) = \frac{1}{n} = \frac{1}{6}$ in the case of rolling a dice
-    \item $E(X) = \sum_{x=1}^n x\frac{1}{n} = \frac{1}{n}\frac{(n+1)n}{2} =\frac{n+1}{2} = \frac{7}{2}$ for dice
-    \item $E(X^2) = \frac{1}{n}(1^2 + 2^2 + ... n^2) = \frac{1}{n}\frac{n(n+1)(2n+1)}{6} =\frac{(n+1)(2n+1)}{6}$
-    \item $Var(X) = E(X^2) - E(X)^2 = \frac{n^2 -1}{12}$
-\end{itemize}
-
-\section{Bernoulli Distribution}
-$Pr(X=x) =
-\begin{cases}
-1-p,\indent x=0\\
-p, \indent\indent x = 1\\
-0,\indent otherwise
-\end{cases}$
-\begin{itemize}
-    \item $P(Success) = p, P(Fail) = 1-p$ 
-    \item $P(X=x) = (1-p)^{1-x}p^x$ \textit{$1-x$ failures until success on $x$th trial}
-    \item $E(X) = 0 * (1-p) + 1*P(X=1) = p$
-    \item $E(X^2) = 0^2 * (1-p) + 1^2*p = E(X) = p$
-    \item $Var(X) = p - p^2 = p(1-p)$
-\end{itemize}
-
-\section{Indicator r.v. Revisited}
-Indicator r.v. essentially follow the Bernoulli Distribution
-\begin{itemize}
-    \item Let $X_i = $ indicator r.v. and $X_i = 1$ if trial $i$ is a success, and $0$ otherwise
-    \item $X = X_1 + X_2 + ... X_n$
-    \item $E(X) = E(X_1 + ... X_n) = E(X_1) + ... E(X_n)$
-    \item $E(X_i) = Pr(trial i is a success) = p \Rightarrow E(X) = np$
-    \item $Var(X) = Var(X_1) + Var(X_2) +... Var(X_n) = np(1-p)$
-\end{itemize}
-
-\section{Binomial Distribution}
-$Bin(n,p)$
-\begin{itemize}
-    \item Flipping coin problems 
-    \item $Pr(X=i) = \binom{n}{i}p^i(1-p)^{n-i}$ for $i= 0, 1, ...n$
-    \item if $X \sim Bin(n,p)$, $\sum_{i=0}^n Pr(X=i) = 1$
-    \item Practical Example: Error Erasure Code
+    \item Toss a coin until the first head shows up
+    \item $Pr(X=i) = (1-p)^{i-1}p$, $i = 1,2,...$ ($i$ starts from $1$ not 0 since you have to have at least 1 trial)
+    \item $E(X) = \sum_{i=1}^\infty Pr(X \geq i) = \frac{1}{p}$ (tail probability)\\
+    $E(X) = p + (1-p)(1+E(X)) = p + 1 + E(X) -p -pE(X) \Rightarrow E(X) = \frac{1}{p}$
+    \item $Var(X) = \frac{1-p}{p^2}$
+    \item Geometric Distributions are MEMORYLESS: If you toss a coin 5 times and they all show up tails, $E(X)$ until your first head is still 2\\
+    $E(X|X>n) = n + \frac{1}{p}$
+    \item Coupon Collector's Problem
     \begin{itemize}
-        \item $n+k$ packets, and each packet has probability $p$ of getting lost ($(1-p)$ of successfully transfering)
-        \item $X \sim Bin(n+k, 1-p)$
-        \item Probability of receiving at least $n$ packets = $Pr(X \geq n) = \sum_{i=n}^{n+k}Pr(X=i) = \sum_{i=n}^{n+k}\binom{n+k}{i}(1-p)^ip^{n+k-i}$
-
+        \item let $T_i = $ number of items you are required to collect until you collect the $i$th new coupon
+        \item $T = \sum_{i=1}^nT_i$ Once you collect $i - 1$ coupons, there are $n-(i-1)$ coupons not seen $\Rightarrow$ $Pr$(new coupon) = $\frac{n-i+1}{n}$
+        \item $E(X_i) = \frac{n}{n-i+1}$
+        \item $T_i \sim Geom(p) \Rightarrow E(T) = \sum_{i=1}^nE(T_i) = \sum_{i=1}^n\frac{n}{n-i+1} \approx n(\ln n + \gamma)$
     \end{itemize}
-
 \end{itemize}
+
+\section{Negative Binomial Distribution}
+Generalized Geometric Distribution that deals with the length of time until $k$ successes
+\begin{itemize}
+    \item Let $X = $ total trials
+    \item $P(X=x) = \binom{x-1}{k-1}(p)^{k}(1-p)^{x-k}$ 
+    \item Let $X_i = $number of trials to obtain $i$ successes after observing $i-1$ successes.
+    \item $X = \sum_{i=1}^kX_i, $where $X_i \sim Geom(p)$\\
+    $E(X) = \sum_{i=1}^kE(X_i) = k*\frac{1}{p} = \frac{k}{p}$
+    \item $Var(X_i) \sim Geom \Rightarrow Var(X) = \sum_{i = 1}^kVar(X_i) = \frac{k(1-p)}{p^2}$
+\end{itemize}
+
+\section{Poisson Distribution}
+Generally for problems that deal with rare events, and is just a form of the \textit{Binomial distribution:}
+\begin{itemize}
+    \item $X \sim Bin(n,p)$ where $n \rightarrow \infty, p \rightarrow 0$ $\Rightarrow$ $X \sim Bin(n, \frac{\lambda}{n})$, and $\lambda > 0$
+    \item $E(X) = np = \lambda = constant$
+    \item $Pr(X = i) = \binom{n}{i}p^i(1-p)^{n-i} = \frac{\lambda^ie^{-\lambda}}{i!}$ as $n \rightarrow \infty$
+    \item $E(X) = \lambda$, $Var(X) = \lambda$
+\end{itemize}
+\textbf{Sum of Poisson Independent r.v.:}
+\begin{itemize}
+    \item Let $X \sim Poiss(\lambda), Y \sim Poiss(\mu)$
+    \item $X + Y \sim Poiss(\lambda + \mu)$ - {It's still Poisson!}
+    \item $E(X + Y) = E(X) + E(Y)$
+\end{itemize}
+\textbf{Poisson Splitting:}
+\begin{itemize}
+    \item $X \sim Poiss(\lambda)$, and $Y$ conditioned on $X=x$ follows $Bin(x,p)$\\ $\Rightarrow Y \sim Poiss(\lambda p)$
+    \item Essentially, if $X$ is "thinned" out to $Y$ such that only a fraction $p\lambda$ of the original $\lambda$ remains, $Y$ is still Poisson!
+\end{itemize}
+
+
 
 
 \end{document}

@@ -12,6 +12,7 @@
 \usepackage{enumitem}
 \usepackage{yfonts}
 \usepackage{ dsfont }
+\usepackage{amsmath}
 \usepackage{array}
 \usepackage{mathabx}
 \usepackage{tabu}  
@@ -19,7 +20,7 @@
 
 \title{CS70 In Simpler Terms - Note 9}
 \author{written by Kevin Liu cs70.kevinmliu.com}
-\date{\today}
+\date{July 31, 2017}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 
@@ -47,55 +48,45 @@
 \begin{document}
 \maketitle
 
-\section{Markov's and Chebyshev's Inequality}
-The following Inequalities are all interrelated and are used to bound the probability of deviating from the mean.
+\section{Modular Arithmetic}
+There are a number of basic rules that you have to know very well when it comes to mods. But with practice, working with mods can easily and quickly become one of your strenghs.
 \begin{itemize}
-    \item Markov's Inequality: $Pr(X\geq a) \leq \frac{E(f(x))}{f(a)}$ where $f$ is an increasing, non-negative function
-    \item Weak form of Markov's Inequality (the form you will most often use): $Pr(X\geq a) \leq \frac{E(X)}{a}$ where $X$ is non-negative
-    \item Chebyshev's Inequality is a continuation of Markov's Inequality. It attempts to bound the probability of any deviation $\alpha$ above or below the mean:
-    \begin{itemize}
-        \item $Pr(|X-\mu| \geq \alpha) \leq \frac{Var(X)}{\alpha^2}$
-        \item The result makes sense because if the $Var(X)$ decreases, then the probability of larger deviations also decreases
-        \item If we let $\alpha  = \beta \sigma$, we can achieve the probability of getting within $\beta$ standard deviations from the mean: $Pr(|X-\mu| \geq \beta \sigma) \leq \frac{1}{\beta^2}$
-        \item Chebyshev's Inequality can be applied to \textit{any} r.v.
-     \end{itemize}
-\end{itemize}
-\section{Confidence Interval}
-\begin{itemize}
-        \item Confidence is defined as 1 - $\delta$, so a $\delta $ of 0.05 gives a confidence of 0.95
-        \item $Pr[\mu \in (\bar x - \epsilon, \bar x + \epsilon)] = Pr(|\bar x - \mu| < \epsilon)$ \\
-        = 1 - $Pr(|\bar X-\mu| \geq \alpha)$ (\textit{Chebyshev})\\
-        $\geq 1 - \frac{Var(\bar X)}{\epsilon^2} = 1 - \frac{\sigma^2}{n\epsilon^2} \geq 1 - \delta$
-        \item $1 - \frac{\sigma^2}{n\epsilon^2} \geq 1 - \delta \Rightarrow \delta \geq \frac{\sigma^2}{n\epsilon^2}$\\ (at most $\delta$ error and at least 1 - $\delta$ confident)
-\end{itemize}
-An important result to keep in mind is that as $n$ increases, the $Pr$(specific event) decreases, but the $Pr$(near the event) increases.\\
-\textit{Example:}\\
-Oftentimes you will be asked to find $n$ given some amount of confidence. We will explore that in this example.
-\begin{itemize}
-    \item We attempt to estimate the bias of a coin (e.g. 0.5 for a fair coin)
-    \item Let $S_n = $ number of heads in $n$ tosses, and let $\hat{p}$ = bias estimate
-    \item $\hat{p} = \frac{S_n}{n}$, $S_n = \sum_{i=1}^{n}X_i$ 
-    $\begin{cases}
-        X_i = 1,\indent heads\\
-        X_i = 0, \indent tails
-    \end{cases}$
-    \item $E(X_i) = p, E(\hat{p} = E(\frac{S_n}{n}) = \frac{1}{n}nX_i = p$
-    \item $Var(\hat{p}) = Var(\frac{S_n}{n} = \frac{1}{n^2}Var(S_n)) = \frac{\sigma^2}{n}$
-    \item $Pr(|\hat{p} - p| \geq \epsilon) \leq \frac{\sigma^2}{n\epsilon^2}$\\
-    $\Rightarrow n \geq \frac{\sigma^2}{\epsilon^2\delta} = \frac{p(1-p)}{\epsilon^2\delta} \geq \frac{1}{4\epsilon^2\delta}$ (variance of single sample is $p(1-p)$ and the bound is at $p = 0.5$)
+    \item $a \equiv a\pmod n$
+    \item if $a \equiv b \pmod n$ and $c \equiv d \pmod n$ \\
+            $\Rightarrow (a+c)\pmod n \equiv (b+d)\pmod n$ and \\
+            $(a*c)\pmod n \equiv (b*d)\pmod n$
+    \item $x$ is said to have a multiplicative inverse(M.I.)$\pmod n$ iff the gcd of $x$ and $n$ is 1 ($n, x$ are relatively prime(coprime))\\
+    $ax\pmod n = 1 = 1\pmod n$, where $a$ is the M.I. of $x\pmod n$
+    \item If $x$ has a multiplicative inverse(M.I.)$\pmod n$ $\Rightarrow$ the M.I. is unique
+    \item \textit{Example on the use of the M.I.: Solve for $x$ where $2x = 3\pmod 7$\\ This equation is equivalent to $2x\pmod 7 = 3\pmod 7$\\ The M.I. of $2\pmod 7$ is $4$ so we multiply both sides of the equation by 4\\ We get $8x\pmod 7 = 3\pmod 7$,\\ which equals} ($8\pmod 7$) ($x\pmod 7$)\textit{$= 12\pmod 7$, \\
+    which simplifies to $x\pmod 7 = 5\pmod 7$. \\So $x=5\pmod 7$}
+    \item Bijection: one-to-one and onto. A function, $f$, is said to be a bijection iff there is an inverse function $g$, such that $g(f(x) = x$ and $f(g(y)) = y$ for all $x,y$.
 
 \end{itemize}
-
-\section{Weak Law of Large Numbers}
-Given an $n$ sample test:
+\textbf{Euclid's Algorithm:} \\
+Let $x \geq y$, and let $x = yq + r$, where $r < y$\\ Then $d=$gcd($x,y$) $=$ gcd($y,r$) because\\
+Taking mod$d$ on both sides, $x$(mod $d$) $= yq($mod $d$) $+ r($mod $d$). We know that $x$(mod $d$)$= 0$,and $yq($mod $d$) also $= 0$ since both terms are divisible by $d$, the greatest common denominator. This means that $r($mod$d$) must also $= 0$, so our proof is complete.\\\\An important result that stems from Euclid's Algorithm is that gcd($x,y$) $= d =$ gcd($x,y-d$).\\\\
+\textbf{Chinese Remainder Theorem:} \\
+I will not go over the proof but I will state the result, which is something you will need to know:
 \begin{itemize}
-    \item Law of Large Numbers - more samples $\Rightarrow$ less deviations
-    \item $\bar X = \frac{X_1 + X_2 +...X_n}{n}$
-    \item $E(\bar X) = \frac{E(X_1) + ...E(X_n)}{n} = \frac{n\mu}{n} = \mu$
-    \item $Var(\bar X) = Var(\frac{1}{n} (X_1 + X_2 + ... X_n)) = \frac{1}{n^2}(Var(X_1) + ... Var(X_n)) = \frac{1}{n^2}n\sigma^2 = \frac{\sigma^2}{n}$
-    \item $Var(\bar X) = \frac{\sigma^2}{n} \rightarrow 0$ as $n \rightarrow \infty$ and $\bar X $ converges to $\mu$
+    \item Given a system of equations:\\
+        $x \equiv a_1($mod $n_1)$\\$x \equiv a_2($mod $n_2)...$\\$x \equiv a_k($mod $n_k)$\\ If the gcd($n_i, n_j) = 1$\\ $\Rightarrow$ There exists a unique solution for $x$ mod($n_1 * n_2 * ... n_k$) 
+    \item You can also go backwards too! Given:\\
+    $n \equiv 1$ mod($5 * 11 * 17$) $\Leftarrow$ coprime numbers\\
+    $\Rightarrow n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$), $n\equiv 1$ mod($5$)\\
+    Because $n = 1 + (5*11*17) * q$, and taking$\pmod 5$ on both sides,\\
+    We see that we get $n\pmod5 = 1\pmod 5$\\
+    Taking (mod 11) and (mod 17) gives us the other 2 results. 
 \end{itemize}
-
+\textbf{Fermat's Little Theorem:} \\
+This is arguably the most important theorem you need to remember when it comes to problems concerning mods. Applying this theorem can often simplify your calculations by a significant amount. 
+\begin{itemize}
+	\item if $p$ is prime, then $a^p\equiv a\pmod p$ \textit{($a^p - a$ is a multiple of p)}
+	\item if $p$ does not divide $a$ where $a >0$, then $a^{p - 1}\equiv 1\pmod p$
+	\item $x^a \equiv x^{a mod(p-1)}$
+	\item \textbf{**IMPORTANT**} $a^{(p-1)(q-1)}\equiv 1$ mod($pq$). This can be extended to any number of variables (e.g. $p,q,r, s$)\\\\
+    \textit{Example: Simplify $11^{97}$mod($3 * 5*7$)\\ From the above theorem, $11^{(3-1)(5-1)(7-1)} \equiv 11^{48} \equiv 1$ mod($3*5*7)$)\\Looking back at our initial problem:\\ $11^{97} = (11^{48})^2 * 11 \equiv 1^2 * 11\pmod{3*5*7} \equiv 11\pmod{105}$ }
+\end{itemize}
 
 
 \end{document}
