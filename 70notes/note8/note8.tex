@@ -83,6 +83,21 @@ Oftentimes you will be asked to find $n$ given some amount of confidence. We wil
     \item $Var(\hat{p}) = Var(\frac{S_n}{n} = \frac{1}{n^2}Var(S_n)) = \frac{\sigma^2}{n}$
     \item $Pr(|\hat{p} - p| \geq \epsilon) \leq \frac{\sigma^2}{n\epsilon^2}$\\
     $\Rightarrow n \geq \frac{\sigma^2}{\epsilon^2\delta} = \frac{p(1-p)}{\epsilon^2\delta} \geq \frac{1}{4\epsilon^2\delta}$ (variance of single sample is $p(1-p)$ and the bound is at $p = 0.5$)
+    \item \textbf{Chebyshev and C.I.:}
+    \\Let $X_n$ denote an i.i.d.
+    \begin{itemize}
+        \item $A_n = \frac{x_1 + ... x_n}{n}$
+        \item The $95\%$ C.I. is $A_n \pm \frac{4.5 \sigma}{\sqrt n}$
+    \end{itemize}
+
+    Flip a coin $n$ times
+    \begin{itemize}
+        \item Let $A_n$ denote the \textit{fraction} of heads that you get
+        \item The $95\%$ C.I. is $A_n \pm \frac{2.25}{\sqrt n}$\\
+        (From above $\sigma^2 = p(1-p) \leq \frac{1}{4} \Rightarrow \sigma \leq \frac{1}{2} \Rightarrow 4.5 * \frac{1}{2} = 2.25$)
+    \end{itemize}
+
+    
 
 \end{itemize}
 

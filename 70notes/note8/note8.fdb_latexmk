@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1501631749 "note8.tex" "note8.pdf" "note8" 1501631750
+["pdflatex"] 1501700902 "note8.tex" "note8.pdf" "note8" 1501700903
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -185,9 +185,9 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1472140845 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1463979169 3873397 413fbfbbedb8e719ddc392043a7add02 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "note8.aux" 1501631750 431 7f2fc5bf1350538ae30a6e15f65326b8 ""
-  "note8.tex" 1501631723 4597 61457bbf9f6688691f8c415c7deab13c ""
+  "note8.aux" 1501700903 431 7f2fc5bf1350538ae30a6e15f65326b8 ""
+  "note8.tex" 1501700902 5166 219c09413ff44c961ba49dca233f4ae0 ""
   (generated)
+  "note8.log"
   "note8.aux"
   "note8.pdf"
-  "note8.log"
