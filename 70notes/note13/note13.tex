@@ -1,0 +1,151 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{enumitem}
+\usepackage{yfonts}
+\usepackage{ dsfont }
+\usepackage{array}
+\usepackage{mathabx}
+\usepackage{tabu}  
+\usepackage{color,soul}
+
+\title{CS70 In Simpler Terms - Note 13}
+\author{written by Kevin Liu cs70.kevinmliu.com}
+\date{August 2, 2017}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{eg}[thm]{Example}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rmk}[thm]{Remark}
+
+\newcommand{\ie}{\emph{i.e.} }
+\newcommand{\cf}{\emph{cf.} }
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\dirac}{\slashed{\partial}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\LieT}{\mathfrak{t}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\A}{\mathds{A}}
+
+\begin{document}
+\maketitle
+
+\section{Continuous Probability}
+Continuous probability is not that much different from discrete probability. Now, instead of dealing with the probability of distinct events, we are dealing with the probability of a range of events. This usually requires the use of integration.\\
+
+There are 2 main functions that you need to be familiar with:
+\begin{itemize}
+    \item Cumulative distribution function (CDF) - $F_x(x) = P(X \leq x)$
+    \item Probability density function (PDF) - $f_x(x) = \frac{dF_x(x)}{dx}$
+    \begin{itemize}
+        \item The PDF $f$ must be nonnegative and $\int_{-\infty}^\infty f(x) \, {\mathrm{d}}x = 1$
+        \item \textbf{Note:} Density $\neq$ probability. This implies that the density at any specific point can be greater than 1. So don't be surprised!
+    \end{itemize}
+\end{itemize}
+Recall that in discrete probability, the way to calculate the expectation of a r.v. is to take the summation of the probability of an event multiplied by the outcome of that event. Similarly in continuous probability, replace the summation with an integral:
+\begin{itemize}
+    \item $E(x) = \int_{-\infty}^\infty xf(x) \, {\mathrm{d}}x$
+    \item $E(x^2) = \int_{-\infty}^\infty x^2f(x) \, {\mathrm{d}}x$
+\end{itemize}
+\textbf{Tail Sum} is an important trick for calculating the expectation of nonnegative r.v.:
+\begin{itemize}
+    \item $E(x) = \int_{0}^\infty (1-F_x(x)) \, {\mathrm{d}}x = \int_{0}^\infty Pr(X >x) \, {\mathrm{d}}x$
+\end{itemize}
+
+\section{Joint Distribution}
+\begin{itemize}
+    \item $Pr(a \leq X \leq b$, $c \leq Y \leq d) = \int_{c}^c \int_{a}^b f(x,y) \, {\mathrm{d}}x \,{\mathrm{d}}y$
+    \begin{itemize}
+        \item $f(x,y) = f_x(x)f_y(y)$
+        \item $f$ must be nonnegative, and $\int_{-\infty}^\infty \int_{\-\infty}^\infty f(x,y) \, {\mathrm{d}}x \,{\mathrm{d}}y = 1$
+    \end{itemize}
+    \item To obtain the marginal distribution of $x$:
+    \begin{itemize}
+        \item $f_x(x) = \int_{-\infty}^\infty f_{x,y}(x,y) \, {\mathrm{d}}y$ \textit{(integrate over all values of $y$)}
+    \end{itemize}
+    \item \textbf{Independent r.v.:}
+    \begin{itemize}
+        \item $Pr(a \leq X \leq b$, $c \leq Y \leq d) = Pr(a \leq X \leq b$) * $Pr(c \leq Y \leq d)$
+        \item Joint density of i.r.v. = product of marginal densities:\\
+        \indent $f(x,y) = f_x(x)*f_y(y)$
+    \end{itemize}
+\end{itemize}
+For the following distributions, I will not go through the derivations, but rather just list out the results, which you should be really familiar with.
+
+\section{Distributions and their Properties}
+\begin{itemize}
+    \item \textbf{Uniform Distribution}
+    \begin{itemize}
+        \item $Unif[0,1]$: $E(X) = \frac{1}{2}$, $Var(X) = \frac{1}{12}$
+        \item $Unif[a,b]: E(X) = \frac{a+b}{2}$, $Var(X) = \frac{1}{12} (b-a)^2$
+    \end{itemize}
+    \item \textbf{Exponential Distribution}\\
+    Analagous to the geometric distribution - \textit{memoryless}\\
+    The parameter $\lambda > 0$
+    \begin{itemize}
+        \item $f(x) = \lambda e^{-\lambda x}$, $x \geq 0$
+        \item $F(x) = 1 - e^{-\lambda x} = Pr(X \leq x)$
+        \item $E(X) = \frac{1}{\lambda}$, $Var(X) = \frac{1}{\lambda^2}$
+        \item \textbf{Important result:} $Pr(X > t) = \int_{t}^\infty \lambda e^{-\lambda x} \, {\mathrm{d}}x$
+    \end{itemize}
+    \textit{Examples:}
+    \begin{enumerate}
+        \item Find the median of an exponential distribution:
+        \begin{itemize}
+            \item $Pr(T \leq t) = \frac{1}{2} = Pr(T \geq t)$
+            \item $1 - e^{-\lambda t} = \frac{1}{2} \Rightarrow \frac{1}{2} = e^{-\lambda t} \Rightarrow t = \frac{\ln2}{\lambda}$
+        \end{itemize}
+        \item $Pr(min(X,Y) = X)$\\$ = Pr(Y > X) = \int_{0}^\infty Pr(Y > y | X= x)f_x(x) \, {\mathrm{d}}x$
+        \item Let $W = max\{X,Y\}$
+        \begin{itemize}
+            \item $F_w(w) = Pr(W \leq w) = Pr(X \leq W) * Pr(Y \leq W) = F_x(w)* F_y(w)$
+        \end{itemize}
+        \item Let $V = min\{X,Y\}$
+        \begin{itemize}
+            \item $1 - F_v(v) = Pr(V > v) = Pr(X > v) * Pr(Y > v) = (1 - F_x(v))* (1 - F_y(v))$
+        \end{itemize}
+        \item Let $X_i \sim Exp(\lambda)$
+        \begin{itemize}
+            \item $Z = min\{X_1, ... X_n\} \sim Exp(\lambda_1 +... \lambda_n) \sim Exp(n\lambda)$
+            \item The sum is still exponential!
+            \item $E(Z) = \frac{1}{n\lambda}$
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Normal/Gaussian Distribution}
+    \begin{itemize}
+        \item $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \,e^{-(x-\mu)^2/(2\sigma^2)}$
+        \item ${\mathbb{P}}[X\le a] = {\mathbb{P}}\!\left[Y\le \frac{a-\mu}{\sigma}\right]$, where $Y$ is standard normal\\ a.k.a. $Y = \frac{X- \mu}{\sigma}$
+        \begin{itemize}
+            \item From the above, we get $X = \sigma Y + \mu$
+            \item $Pr(a \leq Y \leq b) = Pr(\sigma a + \mu \leq X \leq \sigma b + \mu)$
+        \end{itemize}
+        \item Standard normal = $\mu = 0$, $\sigma = 1$
+        \item $68-95-99.7$ Rule: $68\%$ of events in a normal distribution are within 1 s.d. ($\pm 1$), $95\%$ of events are within 2 s.d. ($\pm 2$), and $99.7\%$ are within 3 s.d..
+        \item Let $Z = aX + bY$, where $X \sim (\mu_x, \sigma^2_x)$, $Y \sim (\mu_y, \sigma^2_y)$
+        \begin{itemize}
+            \item $\mu_z = a\mu_x + b\mu_y$
+            \item $\sigma^2_z = a^2\sigma^2_x + b^2\sigma^2_y$
+        \end{itemize}
+
+    \end{itemize}
+
+\end{itemize}
+
+\end{document}
