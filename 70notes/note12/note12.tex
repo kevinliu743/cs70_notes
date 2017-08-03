@@ -78,7 +78,7 @@ Hitting time - The expected time until you reach a state $s'$
         \item Let's say you wish to calculate the time it takes for you to count $n$ medals. After counting $i$ medals, the probability that you will be able to count the $i+1$th medal is $p$ and the probability that you will mess up and have to start over is $1-p$. How would you approach this problem?
         \begin{itemize}
             \item Turns out there is a quick trick for writing the FSE(First Step Equations), and you can let $\beta (i)$ denote the expected time to count \textit{the remaining} $i$ medals
-            \item $\beta (i) = p (\beta (i - 1) + 1) + (1-p)\beta (n)$ 
+            \item $\beta (i) = 1 + p\beta (i - 1) + (1-p)\beta (n)$ 
         \end{itemize}
         \item Another good Hitting Time Question is the Gambler's Ruin Problem. Given the state space $\cal X$ $= \{0,...b\}$ and the probability of winning each round be $p$, what is the probability that you will reach $b$ before 0?\\
         You will most likely only be asked to write the FSE (or the majority of the points will be writing the equations):
